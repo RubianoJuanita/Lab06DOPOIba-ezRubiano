@@ -1,9 +1,0 @@
-#BlueJ class context
-comment0.target=TestHay
-comment1.params=
-comment1.target=void\ testColorInicial()
-comment1.text=\r\n\ Test\ para\ comprobar\ que\ el\ color\ inicial\ que\ se\ tiene\ es\ rojo\ \r\n\ Se\ define\ que\ el\ color\ rojo\ es\ el\ inicial\ por\ constructor\ de\ Hay\r\n
-comment2.params=
-comment2.target=void\ testCambioColor()
-comment2.text=\r\n\ Test\ que\ se\ hace\ para\ comprobar\ que\ se\ est\u00E1\ alternando\ el\ color\ seg\u00FAn\ pide\ el\ enunciado.\r\n\ Se\ usa\ el\ assertEquals\ para\ comprobar\ esto\r\n\ Se\ usa\ con\ base\ en\ el\ aplicado\ de\ los\ Tic-Tac\ \r\n
-numComments=3
