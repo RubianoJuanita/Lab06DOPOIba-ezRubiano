@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Animal
+comment1.params=energy\ days
+comment1.target=Animal(int,\ int)
+comment1.text=\r\n\ Create\ a\ new\ animal\r\n\ \r\n
+comment2.params=
+comment2.target=boolean\ step()
+comment2.text=\r\n\ The\ animal\ makes\ one\ step\r\n\ \r\n
+comment3.params=
+comment3.target=void\ eat()
+comment3.text=\r\n\ The\ animal\ eats\r\n\ \r\n
+comment4.params=
+comment4.target=int\ getEnergy()
+comment4.text=\r\n\ Returns\ the\ energy\r\n\ \r\n\ @return\r\n
+comment5.params=
+comment5.target=boolean\ isAnimal()
+comment5.text=\r\n\ It's\ an\ animal\r\n
+comment6.params=e
+comment6.target=void\ setEnergy(int)
+comment6.text=\r\n\ Permite\ actualizar\ la\ energ\u00EDa\ del\ animal.\r\n\ \r\n\ @param\ e\ Nueva\ cantidad\ de\ energ\u00EDa\r\n
+numComments=7
