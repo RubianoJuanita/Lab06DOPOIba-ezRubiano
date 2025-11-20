@@ -1,6 +1,6 @@
 package domain;
 
-import java.io.File;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -16,7 +16,8 @@ import java.util.*;
  * @author IbañezRubiano
  * @version 2
  */
-public class Valley {
+public class Valley implements Serializable {
+    private static final long serialVersionUID = 1L;
     static private int SIZE = 25;
     private Unit[][] places;
 
@@ -155,23 +156,54 @@ public class Valley {
     }
 
     /**
-     * Abre un valle desde un archivo.
+     * Abre un valle desde un archivo serializado.
+     * Lee el objeto Valley completo desde el archivo y restaura las referencias.
      * 
      * @param file archivo desde donde se abrirá el valle
-     * @throws ValleyException si la operación no está implementada
+     * @throws ValleyException si ocurre un error al abrir el archivo
      */
     public void open(File file) throws ValleyException {
-        throw new ValleyException("Opción open en construcción. Archivo " + file.getName());
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            Valley loadedValley = (Valley) ois.readObject();
+            this.places = loadedValley.places;
+            restoreReferences();
+        } catch (IOException e) {
+            throw new ValleyException("Error al abrir el archivo " + file.getName() + ": " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            throw new ValleyException("Error al leer el archivo " + file.getName() + ": formato inválido");
+        }
     }
 
     /**
-     * Guarda el valle actual en un archivo.
+     * Restaura las referencias al valley en todos los mamíferos después de
+     * deserializar.
+     */
+    private void restoreReferences() {
+        for (int r = 0; r < SIZE; r++) {
+            for (int c = 0; c < SIZE; c++) {
+                Unit unit = places[r][c];
+                if (unit instanceof Mammal) {
+                    ((Mammal) unit).valley = this;
+                } else if (unit instanceof Hay) {
+                    ((Hay) unit).valley = this;
+                }
+            }
+        }
+    }
+
+    /**
+     * Guarda el valle actual en un archivo serializado.
+     * Escribe el objeto Valley completo al archivo.
      * 
      * @param file archivo donde se guardará el valle
-     * @throws ValleyException si la operación no está implementada
+     * @throws ValleyException si ocurre un error al guardar el archivo
      */
     public void save(File file) throws ValleyException {
-        throw new ValleyException("Opción save en construcción. Archivo " + file.getName());
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+            oos.writeObject(this);
+        } catch (IOException e) {
+            throw new ValleyException("Error al guardar el archivo " + file.getName() + ": " + e.getMessage());
+        }
     }
 
     /**
