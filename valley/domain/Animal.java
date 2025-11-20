@@ -11,11 +11,10 @@ public abstract class Animal {
      * Create a new animal
      * 
      */
-    /**
-     * Basic information about an Animal.
-     * Holds energy and day counters and provides basic behaviors like stepping
-     * and eating.
-     */
+    public Animal(int energy, int days) {
+        this.energy = energy;
+        this.days = days;
+    }
 
     /**
      * The animal makes one step
