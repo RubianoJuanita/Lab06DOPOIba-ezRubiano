@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import java.awt.Color;
 
-public class TestOveja {
+public class TestSheep {
 
     private Valley valley;
 
@@ -19,7 +19,7 @@ public class TestOveja {
      */
     @Test
     public void testColorInicial() {
-        Oveja o = new Oveja(valley, 2, 2);
+        Sheep o = new Sheep(valley, 2, 2);
         assertEquals("El color inicial debe ser gris claro", Color.LIGHT_GRAY, o.getColor());
     }
 
@@ -28,7 +28,7 @@ public class TestOveja {
      */
     @Test
     public void testEnergiaInicial() {
-        Oveja o = new Oveja(valley, 1, 1);
+        Sheep o = new Sheep(valley, 1, 1);
         assertEquals("La energía inicial debe ser 5", 5, o.getEnergy());
     }
 
@@ -37,7 +37,7 @@ public class TestOveja {
      */
     @Test
     public void testMuertePorEnergia() {
-        Oveja o = new Oveja(valley, 1, 1);
+        Sheep o = new Sheep(valley, 1, 1);
         o.setEnergy(0);
         o.act();
         assertNull("La oveja debe morir y desaparecer del valle", valley.getUnit(1, 1));
@@ -48,7 +48,7 @@ public class TestOveja {
      */
     @Test
     public void testMuertePorLobo() {
-        Oveja o = new Oveja(valley, 2, 2);
+        Sheep o = new Sheep(valley, 2, 2);
         Wolf w = new Wolf(valley, 1, 1);
         o.act();
         assertNull("La oveja debe morir si hay un lobo adyacente", valley.getUnit(2, 2));
@@ -59,8 +59,8 @@ public class TestOveja {
      */
     @Test
     public void testEnergiaAumentaConOtraOveja() {
-        Oveja o1 = new Oveja(valley, 2, 2);
-        Oveja o2 = new Oveja(valley, 2, 3);
+        Sheep o1 = new Sheep(valley, 2, 2);
+        Sheep o2 = new Sheep(valley, 2, 3);
         int energiaInicial = o1.getEnergy();
         o1.act();
         assertTrue("La energía debe aumentar si hay otra oveja cerca", o1.getEnergy() > energiaInicial);
@@ -71,7 +71,7 @@ public class TestOveja {
      */
     @Test
     public void testForma() {
-        Oveja o = new Oveja(valley, 3, 3);
+        Sheep o = new Sheep(valley, 3, 3);
         assertEquals("La oveja debe tener forma cuadrada", Unit.SQUARE, o.shape());
     }
 }

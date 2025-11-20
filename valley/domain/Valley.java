@@ -1,5 +1,6 @@
 package domain;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -7,9 +8,13 @@ import java.util.*;
  *
  * Guarda, crea y actualiza las unidades (ovejas, lobos, heno, etc.) durante
  * cada tic.
+ * 
+ * Se añade Persistencia basica para guardar y cargar el estado del valle en un
+ * archivo de texto.
  *
- * @author MorenoRubiano
- * @version 1.0
+ * @author1 MorenoRubiano
+ * @author IbañezRubiano
+ * @version 2
  */
 public class Valley {
     static private int SIZE = 25;
@@ -68,8 +73,8 @@ public class Valley {
         Wolf akela = new Wolf(this, 10, 10);
         Wolf larka = new Wolf(this, 15, 15);
 
-        Oveja chaun = new Oveja(this, 1, 5);
-        Oveja woolly = new Oveja(this, 13, 10);
+        Sheep chaun = new Sheep(this, 1, 5);
+        Sheep woolly = new Sheep(this, 13, 10);
 
         Hay alarm = new Hay(this, 0, 0);
         Hay alert = new Hay(this, 0, SIZE - 1);
@@ -79,8 +84,8 @@ public class Valley {
         setUnit(10, 10, akela);
         setUnit(15, 15, larka);
 
-        Humano moreno = new Humano(this, 15, 5);
-        Humano rubiano = new Humano(this, 18, 20);
+        Human moreno = new Human(this, 15, 5);
+        Human rubiano = new Human(this, 18, 20);
 
         // Hole Moreno = new Hole(this, 9, 9);
         // Hole Rubiano = new Hole(this, 18, 18);
@@ -147,5 +152,45 @@ public class Valley {
                 }
             }
         }
+    }
+
+    /**
+     * Abre un valle desde un archivo.
+     * 
+     * @param file archivo desde donde se abrirá el valle
+     * @throws ValleyException si la operación no está implementada
+     */
+    public void open(File file) throws ValleyException {
+        throw new ValleyException("Opción open en construcción. Archivo " + file.getName());
+    }
+
+    /**
+     * Guarda el valle actual en un archivo.
+     * 
+     * @param file archivo donde se guardará el valle
+     * @throws ValleyException si la operación no está implementada
+     */
+    public void save(File file) throws ValleyException {
+        throw new ValleyException("Opción save en construcción. Archivo " + file.getName());
+    }
+
+    /**
+     * Importa un valle desde un archivo.
+     * 
+     * @param file archivo desde donde se importará el valle
+     * @throws ValleyException si la operación no está implementada
+     */
+    public void importValley(File file) throws ValleyException {
+        throw new ValleyException("Opción import en construcción. Archivo " + file.getName());
+    }
+
+    /**
+     * Exporta el valle actual a un archivo.
+     * 
+     * @param file archivo donde se exportará el valle
+     * @throws ValleyException si la operación no está implementada
+     */
+    public void export(File file) throws ValleyException {
+        throw new ValleyException("Opción export en construcción. Archivo " + file.getName());
     }
 }
