@@ -6,34 +6,33 @@ import java.awt.Color;
 public class TestHay {
 
     /**
-     * Test para comprobar que el color inicial que se tiene es rojo 
-     * Se define que el color rojo es el inicial por constructor de Hay
+     * Test to verify that the initial color is red.
+     * The Hay constructor sets the initial color to red.
      */
     @Test
-    public void testColorInicial() {
+    public void testInitialColor() {
         Hay h = new Hay(5, 5);
-        assertEquals("El color inicial del heno debe ser rojo", Color.red, h.getColor());
+        assertEquals("The initial color of hay should be red", Color.red, h.getColor());
     }
 
     
     /**
-     * Test que se hace para comprobar que se está alternando el color según pide el enunciado.
-     * Se usa el assertEquals para comprobar esto
-     * Se usa con base en el aplicado de los Tic-Tac 
+     * Test to verify that the color alternates as expected.
+     * Uses assertEquals to verify behavior after ticks.
      */
     @Test
-    public void testCambioColor() {
+    public void testColorToggle() {
         Hay h = new Hay(3, 3);
 
-        // Color inicial que se tiene :rojo
+        // Initial color: red
         assertEquals(Color.red, h.getColor());
 
-        // Primer tic-tac debe pasarse a amarillo como se define en la secuencia 
+        // After first tick it should become yellow
         h.act();
-        assertEquals("Después del primer click debe ser amarillo", Color.yellow, h.getColor());
+        assertEquals("After the first click it should be yellow", Color.yellow, h.getColor());
 
-        // Segundo tic-tac debe volver a rojo como se define en la secuencia 
+        // After second tick it should return to red
         h.act();
-        assertEquals("Después del segundo act() debe volver a rojo", Color.red, h.getColor());
+        assertEquals("After the second act() it should return to red", Color.red, h.getColor());
     }
 }

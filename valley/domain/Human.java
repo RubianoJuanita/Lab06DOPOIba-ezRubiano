@@ -6,34 +6,34 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Representa un humano en el valle. El humano consume energía cada tic,
- * busca y come recursos adyacentes (paja), puede matar y consumir lobos u
- * ovejas adyacentes para ganar energía, y se mueve a casillas vacías cuando
- * es necesario.
+ * Represents a human in the valley. The human consumes energy each tick,
+ * searches for and eats adjacent resources (hay), can kill and consume
+ * adjacent wolves or sheep to gain energy, and moves to empty cells when
+ * necessary.
  *
- * @author MorenoRubiano
- * @version 1.0
+ * Author: MorenoRubiano
+ * Version: 1.0
  */
 public class Human extends Mammal {
-    /** Energía máxima/inicial del humano. */
+    /** Maximum / initial energy for the human. */
     public static final int INITIAL_ENERGY = 250;
     public static final int INITIAL_DAYS = 0;
 
-    /** Energía ganada al comer paja (Hay). */
+    /** Energy gained when eating hay (Hay). */
     private static final int ENERGY_FROM_HAY = 50;
 
-    /** Energía ganada al matar un lobo. */
+    /** Energy gained when killing a wolf. */
     private static final int ENERGY_FROM_WOLF = 25;
 
-    /** Energía ganada al matar una oveja. */
+    /** Energy gained when killing a sheep. */
     private static final int ENERGY_FROM_SHEEP = 50;
 
     /**
-     * Crea un nuevo humano en la posición indicada dentro del valle.
+     * Creates a new human at the indicated position inside the valley.
      *
-     * @param valley el valle donde vive
-     * @param row    fila inicial
-     * @param column columna inicial
+     * @param valley the valley where it lives
+     * @param row    initial row
+     * @param column initial column
      */
     public Human(Valley valley, int row, int column) {
         super(valley, row, column, INITIAL_ENERGY, INITIAL_DAYS);
@@ -41,16 +41,16 @@ public class Human extends Mammal {
     }
 
     /**
-     * Forma gráfica del humano (triángulo).
+     * Graphical form of the human (triangle).
      *
-     * @return constante de forma
+     * @return shape constant
      */
     public int shape() {
         return Unit.TRIANGLE;
     }
 
     /**
-     * Acción que ejecuta el humano cada tic.
+     * Action executed by the human on each tick.
      */
     public void act() {
         consumeEnergy();
@@ -67,33 +67,32 @@ public class Human extends Mammal {
         performAction();
     }
 
-    /** Resta 1 punto de energía al humano. */
+    /** Subtracts 1 energy point from the human. */
     private void consumeEnergy() {
         setEnergy(getEnergy() - 1);
     }
 
     /**
-     * Indica si el humano ha muerto por falta de energía.
+     * Indicates whether the human has died due to lack of energy.
      *
-     * @return true si la energía es menor o igual a 0
+     * @return true if energy is less than or equal to 0
      */
     private boolean isDead() {
         return getEnergy() <= 0;
     }
 
     /**
-     * Determina si el humano debe descansar. Solo descansa si tiene la energía
-     * inicial
-     * y hay como máximo 1 lobo adyacente.
+     * Determines whether the human should rest. The human rests only if it has
+     * the initial energy and there is at most one adjacent wolf.
      *
-     * @return true si debe descansar
+     * @return true if it should rest
      */
     private boolean shouldRest() {
         int wolfCount = countAdjacentWolves();
         return getEnergy() >= INITIAL_ENERGY && wolfCount <= 1;
     }
 
-    /** Cuenta los lobos en las 8 casillas adyacentes. */
+    /** Counts wolves in the 8 adjacent cells. */
     private int countAdjacentWolves() {
         int count = 0;
         int[][] bounds = getAdjacentBounds();
@@ -113,8 +112,7 @@ public class Human extends Mammal {
     }
 
     /**
-     * Ejecuta la lógica de búsqueda y movimiento/comer según el escaneo de las
-     * casillas adyacentes.
+     * Performs the search and move/eat logic based on scanning adjacent cells.
      */
     private void performAction() {
         List<int[]> hays = new ArrayList<>();
@@ -127,8 +125,8 @@ public class Human extends Mammal {
     }
 
     /**
-     * Escanea las 8 casillas adyacentes y clasifica cada posición en una de las
-     * listas proporcionadas.
+     * Scans the 8 adjacent cells and classifies each position into the
+     * provided lists.
      */
     private void scanAdjacentCells(List<int[]> hays, List<int[]> wolves,
             List<int[]> sheeps, List<int[]> empties) {
@@ -145,8 +143,8 @@ public class Human extends Mammal {
     }
 
     /**
-     * Clasifica una celda adyacente añadiendo su posición a la lista
-     * correspondiente.
+     * Classifies an adjacent cell by adding its position to the corresponding
+     * list.
      */
     private void classifyCell(int r, int c, List<int[]> hays, List<int[]> wolves,
             List<int[]> sheeps, List<int[]> empties) {
@@ -165,9 +163,8 @@ public class Human extends Mammal {
     }
 
     /**
-     * Decide la acción a partir de las listas clasificadas: comer paja, matar
-     * lobos,
-     * matar ovejas o moverse a vacío.
+     * Decides the action based on the classified lists: eat hay, kill wolves,
+     * kill sheep, or move to an empty cell.
      */
     private void executeMovementStrategy(List<int[]> hays, List<int[]> wolves,
             List<int[]> sheeps, List<int[]> empties) {
@@ -180,7 +177,7 @@ public class Human extends Mammal {
         tryMoveToEmpty(empties);
     }
 
-    /** Intenta comer paja si hay; devuelve true si logra moverse y comer. */
+    /** Attempts to eat hay if available; returns true if it moves and eats. */
     private boolean tryEatHay(List<int[]> hays) {
         if (hays.isEmpty())
             return false;
@@ -193,7 +190,7 @@ public class Human extends Mammal {
         return false;
     }
 
-    /** Intenta matar un lobo y ganar energía; devuelve true si lo hace. */
+    /** Attempts to kill a wolf and gain energy; returns true if successful. */
     private boolean tryEatWolf(List<int[]> wolves) {
         if (wolves.isEmpty())
             return false;
@@ -206,7 +203,7 @@ public class Human extends Mammal {
         return false;
     }
 
-    /** Intenta matar una oveja y ganar energía; devuelve true si lo hace. */
+    /** Attempts to kill a sheep and gain energy; returns true if successful. */
     private boolean tryEatSheep(List<int[]> sheeps) {
         if (sheeps.isEmpty())
             return false;
@@ -219,7 +216,7 @@ public class Human extends Mammal {
         return false;
     }
 
-    /** Mueve a una casilla vacía aleatoria si existe alguna. */
+    /** Moves to a random empty cell if any exist. */
     private void tryMoveToEmpty(List<int[]> empties) {
         if (empties.isEmpty())
             return;
@@ -228,19 +225,19 @@ public class Human extends Mammal {
         move(target[0], target[1]);
     }
 
-    /** Selecciona aleatoriamente una posición de la lista. */
+    /** Selects a random position from the list. */
     private int[] selectRandomTarget(List<int[]> targets) {
         Random rnd = new Random();
         return targets.get(rnd.nextInt(targets.size()));
     }
 
-    /** Aumenta la energía hasta un máximo de {@link #INITIAL_ENERGY}. */
+    /** Increases energy up to the maximum defined by {@link #INITIAL_ENERGY}. */
     private void gainEnergy(int amount) {
         setEnergy(Math.min(getEnergy() + amount, INITIAL_ENERGY));
     }
 
     /**
-     * Calcula los límites (filas y columnas) para revisar las casillas adyacentes.
+     * Calculates the bounds (rows and columns) to check adjacent cells.
      */
     private int[][] getAdjacentBounds() {
         int last = valley.getSize() - 1;
@@ -252,7 +249,7 @@ public class Human extends Mammal {
         return new int[][] { { minR, maxR }, { minC, maxC } };
     }
 
-    /** Comprueba si las coordenadas son la posición actual del humano. */
+    /** Checks whether the coordinates correspond to the human's current position. */
     private boolean isCurrentPosition(int r, int c) {
         return r == row && c == column;
     }

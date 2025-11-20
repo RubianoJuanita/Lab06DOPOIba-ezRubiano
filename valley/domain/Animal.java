@@ -11,11 +11,11 @@ public abstract class Animal {
      * Create a new animal
      * 
      */
-
-    public Animal(int energy, int days) {
-        this.energy = energy;
-        this.days = days;
-    }
+    /**
+     * Basic information about an Animal.
+     * Holds energy and day counters and provides basic behaviors like stepping
+     * and eating.
+     */
 
     /**
      * The animal makes one step
@@ -55,9 +55,9 @@ public abstract class Animal {
     }
 
     /**
-     * Permite actualizar la energía del animal.
-     * 
-     * @param e Nueva cantidad de energía
+     * Allows updating the animal's energy.
+     *
+     * @param e new energy amount
      */
     public final void setEnergy(int e) {
         energy = e;
