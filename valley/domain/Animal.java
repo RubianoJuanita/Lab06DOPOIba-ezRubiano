@@ -55,9 +55,9 @@ public abstract class Animal {
     }
 
     /**
-     * Permite actualizar la energía del animal.
+     * Allows updating the animal's energy.
      * 
-     * @param e Nueva cantidad de energía
+     * @param e New energy amount
      */
     public final void setEnergy(int e) {
         energy = e;

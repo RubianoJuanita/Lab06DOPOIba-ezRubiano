@@ -11,67 +11,67 @@ public class TestOveja {
 
     @Before
     public void setUp() {
-        valley = new Valley(); // tamaño pequeño de valle
+        valley = new Valley(); // small valley size
     }
 
     /**
-     * Verifica que una oveja se inicializa con color gris claro
+     * Verifies that a sheep is initialized with light gray color
      */
     @Test
     public void testColorInicial() {
-        Oveja o = new Oveja(valley, 2, 2);
-        assertEquals("El color inicial debe ser gris claro", Color.LIGHT_GRAY, o.getColor());
+        Sheep o = new Sheep(valley, 2, 2);
+        assertEquals("The initial color must be light gray", Color.LIGHT_GRAY, o.getColor());
     }
 
     /**
-     * Verifica que la oveja comienza con energía inicial 5
+     * Verifies that the sheep starts with initial energy 5
      */
     @Test
     public void testEnergiaInicial() {
-        Oveja o = new Oveja(valley, 1, 1);
-        assertEquals("La energía inicial debe ser 5", 5, o.getEnergy());
+        Sheep o = new Sheep(valley, 1, 1);
+        assertEquals("The initial energy must be 5", 5, o.getEnergy());
     }
 
     /**
-     * Verifica que la oveja muere si su energía llega a 0
+     * Verifies that the sheep dies if its energy reaches 0
      */
     @Test
     public void testMuertePorEnergia() {
-        Oveja o = new Oveja(valley, 1, 1);
+        Sheep o = new Sheep(valley, 1, 1);
         o.setEnergy(0);
         o.act();
-        assertNull("La oveja debe morir y desaparecer del valle", valley.getUnit(1, 1));
+        assertNull("The sheep must die and disappear from the valley", valley.getUnit(1, 1));
     }
 
     /**
-     * Verifica que la oveja muere al estar cerca de un lobo
+     * Verifies that the sheep dies when near a wolf
      */
     @Test
     public void testMuertePorLobo() {
-        Oveja o = new Oveja(valley, 2, 2);
+        Sheep o = new Sheep(valley, 2, 2);
         Wolf w = new Wolf(valley, 1, 1);
         o.act();
-        assertNull("La oveja debe morir si hay un lobo adyacente", valley.getUnit(2, 2));
+        assertNull("The sheep must die if there is an adjacent wolf", valley.getUnit(2, 2));
     }
 
     /**
-     * Verifica que la oveja aumenta su energía al estar cerca de otra oveja
+     * Verifies that the sheep increases its energy when near another sheep
      */
     @Test
     public void testEnergiaAumentaConOtraOveja() {
-        Oveja o1 = new Oveja(valley, 2, 2);
-        Oveja o2 = new Oveja(valley, 2, 3);
+        Sheep o1 = new Sheep(valley, 2, 2);
+        Sheep o2 = new Sheep(valley, 2, 3);
         int energiaInicial = o1.getEnergy();
         o1.act();
-        assertTrue("La energía debe aumentar si hay otra oveja cerca", o1.getEnergy() > energiaInicial);
+        assertTrue("Energy must increase if there is another sheep nearby", o1.getEnergy() > energiaInicial);
     }
 
     /**
-     * Verifica que la oveja tiene forma cuadrada
+     * Verifies that the sheep has a square shape
      */
     @Test
     public void testForma() {
-        Oveja o = new Oveja(valley, 3, 3);
-        assertEquals("La oveja debe tener forma cuadrada", Unit.SQUARE, o.shape());
+        Sheep o = new Sheep(valley, 3, 3);
+        assertEquals("The sheep must have a square shape", Unit.SQUARE, o.shape());
     }
 }

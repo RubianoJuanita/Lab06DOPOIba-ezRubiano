@@ -1,4 +1,5 @@
 package domain;
+
 import static org.junit.Assert.*;
 import org.junit.Test;
 import java.awt.Color;
@@ -6,34 +7,34 @@ import java.awt.Color;
 public class TestHay {
 
     /**
-     * Test para comprobar que el color inicial que se tiene es rojo 
-     * Se define que el color rojo es el inicial por constructor de Hay
+     * Test to verify that the initial color is red
+     * It is defined that red color is the initial one by Hay constructor
      */
     @Test
     public void testColorInicial() {
         Hay h = new Hay(5, 5);
-        assertEquals("El color inicial del heno debe ser rojo", Color.red, h.getColor());
+        assertEquals("The initial color of hay must be red", Color.red, h.getColor());
     }
 
-    
     /**
-     * Test que se hace para comprobar que se está alternando el color según pide el enunciado.
-     * Se usa el assertEquals para comprobar esto
-     * Se usa con base en el aplicado de los Tic-Tac 
+     * Test done to verify that the color is alternating as requested by the
+     * statement.
+     * The assertEquals is used to verify this
+     * Used based on the applied Tic-Tac
      */
     @Test
     public void testCambioColor() {
         Hay h = new Hay(3, 3);
 
-        // Color inicial que se tiene :rojo
+        // Initial color: red
         assertEquals(Color.red, h.getColor());
 
-        // Primer tic-tac debe pasarse a amarillo como se define en la secuencia 
+        // First tic-tac should change to yellow as defined in the sequence
         h.act();
-        assertEquals("Después del primer click debe ser amarillo", Color.yellow, h.getColor());
+        assertEquals("After the first click it must be yellow", Color.yellow, h.getColor());
 
-        // Segundo tic-tac debe volver a rojo como se define en la secuencia 
+        // Second tic-tac should return to red as defined in the sequence
         h.act();
-        assertEquals("Después del segundo act() debe volver a rojo", Color.red, h.getColor());
+        assertEquals("After the second act() it must return to red", Color.red, h.getColor());
     }
 }

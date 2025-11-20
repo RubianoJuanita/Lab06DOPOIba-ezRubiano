@@ -68,8 +68,8 @@ public class Valley {
         Wolf akela = new Wolf(this, 10, 10);
         Wolf larka = new Wolf(this, 15, 15);
 
-        Oveja chaun = new Oveja(this, 1, 5);
-        Oveja woolly = new Oveja(this, 13, 10);
+        Sheep chaun = new Sheep(this, 1, 5);
+        Sheep woolly = new Sheep(this, 13, 10);
 
         Hay alarm = new Hay(this, 0, 0);
         Hay alert = new Hay(this, 0, SIZE - 1);
@@ -79,8 +79,8 @@ public class Valley {
         setUnit(10, 10, akela);
         setUnit(15, 15, larka);
 
-        Humano moreno = new Humano(this, 15, 5);
-        Humano rubiano = new Humano(this, 18, 20);
+        Human moreno = new Human(this, 15, 5);
+        Human rubiano = new Human(this, 18, 20);
 
         // Hole Moreno = new Hole(this, 9, 9);
         // Hole Rubiano = new Hole(this, 18, 18);

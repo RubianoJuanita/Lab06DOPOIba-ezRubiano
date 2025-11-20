@@ -3,13 +3,13 @@ package domain;
 import java.awt.Color;
 
 /**
- * Características de la clase
- * - Forma: Cuadrada (SQUARE)
- * - Es un recurso por lo tanto no es animal
- * - Cambia de color en cada tic-tac (cada vez que se pulsa el botón).
- * - Color: alterna entre rojo y amarillo (rojo → amarillo → rojo → amarillo →
- * rojo)
- * - Autores: Cristian Moreno / Juanita Rubiano
+ * Class characteristics
+ * - Shape: Square (SQUARE)
+ * - It is a resource, therefore not an animal
+ * - Changes color on each tic-tac (each time the button is pressed).
+ * - Color: alternates between red and yellow (red → yellow → red → yellow →
+ * red)
+ * - Authors: Cristian Moreno / Juanita Rubiano
  */
 public class Hay implements Unit {
 
@@ -19,11 +19,11 @@ public class Hay implements Unit {
     private int column;
 
     /**
-     * Constructor del paquete de heno
+     * Hay package constructor
      * 
-     * @param row    Fila donde se ubica
-     * @param column Columna donde se ubica
-     * @param valley Valle al que pertenece (opcional para tests)
+     * @param row    Row where it is located
+     * @param column Column where it is located
+     * @param valley Valley to which it belongs (optional for tests)
      */
     public Hay(int row, int column) {
         this(null, row, column);
@@ -33,7 +33,7 @@ public class Hay implements Unit {
         this.valley = valley;
         this.row = row;
         this.column = column;
-        this.color = Color.red; // inicia en rojo
+        this.color = Color.red; // starts in red
         if (valley != null) {
             valley.setUnit(row, column, this);
         }

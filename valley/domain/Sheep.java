@@ -3,37 +3,36 @@ package domain;
 import java.awt.Color;
 
 /**
- * Oveja del valle.
+ * Valley sheep.
  *
- * Comportamiento básico: pierde energía al moverse, evita lobos (muere si hay
- * uno
- * adyacente), se beneficia de ovejas cercanas y se desplaza norte/sur cambiando
- * dirección en los límites.
+ * Basic behavior: loses energy when moving, avoids wolves (dies if there is
+ * one adjacent), benefits from nearby sheep and moves north/south changing
+ * direction at the boundaries.
  *
  * @author MorenoRubiano
  * @version 1.0
  */
-public class Oveja extends Mammal {
+public class Sheep extends Mammal {
 
     private static final int INITIAL_ENERGY = 5;
     private static final int INITIAL_DAYS = 0;
     private boolean movingNorth = true;
 
     /**
-     * Crea una oveja en la posición indicada.
+     * Creates a sheep at the indicated position.
      *
-     * @param valley valle donde se coloca
-     * @param row    fila inicial
-     * @param column columna inicial
+     * @param valley valley where it is placed
+     * @param row    initial row
+     * @param column initial column
      */
-    public Oveja(Valley valley, int row, int column) {
+    public Sheep(Valley valley, int row, int column) {
         super(valley, row, column, INITIAL_ENERGY, INITIAL_DAYS);
         color = Color.LIGHT_GRAY;
         movingNorth = true;
     }
 
     /**
-     * Forma gráfica (cuadrado).
+     * Graphical shape (square).
      *
      * @return {@link Unit#SQUARE}
      */
@@ -42,7 +41,7 @@ public class Oveja extends Mammal {
     }
 
     /**
-     * Acción por tic: interactúa con vecinos, actualiza energía y se mueve.
+     * Action per tic: interacts with neighbors, updates energy and moves.
      */
     public void act() {
         if (getEnergy() == 0) {
@@ -68,7 +67,7 @@ public class Oveja extends Mammal {
                     die();
                     return;
                 }
-                if (u instanceof Oveja) {
+                if (u instanceof Sheep) {
                     setEnergy(getEnergy() + 1);
                 }
             }
