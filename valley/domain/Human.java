@@ -14,7 +14,7 @@ import java.util.Random;
  * @author MorenoRubiano
  * @version 1.0
  */
-public class Humano extends Mammal {
+public class Human extends Mammal {
     /** Energía máxima/inicial del humano. */
     public static final int INITIAL_ENERGY = 250;
     public static final int INITIAL_DAYS = 0;
@@ -35,7 +35,7 @@ public class Humano extends Mammal {
      * @param row    fila inicial
      * @param column columna inicial
      */
-    public Humano(Valley valley, int row, int column) {
+    public Human(Valley valley, int row, int column) {
         super(valley, row, column, INITIAL_ENERGY, INITIAL_DAYS);
         color = Color.PINK;
     }
@@ -159,7 +159,7 @@ public class Humano extends Mammal {
             hays.add(position);
         } else if (u instanceof Wolf) {
             wolves.add(position);
-        } else if (u instanceof Oveja) {
+        } else if (u instanceof Sheep) {
             sheeps.add(position);
         }
     }

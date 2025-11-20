@@ -13,7 +13,7 @@ import java.awt.Color;
  * @author MorenoRubiano
  * @version 1.0
  */
-public class Oveja extends Mammal {
+public class Sheep extends Mammal {
 
     private static final int INITIAL_ENERGY = 5;
     private static final int INITIAL_DAYS = 0;
@@ -26,7 +26,7 @@ public class Oveja extends Mammal {
      * @param row    fila inicial
      * @param column columna inicial
      */
-    public Oveja(Valley valley, int row, int column) {
+    public Sheep(Valley valley, int row, int column) {
         super(valley, row, column, INITIAL_ENERGY, INITIAL_DAYS);
         color = Color.LIGHT_GRAY;
         movingNorth = true;
@@ -68,7 +68,7 @@ public class Oveja extends Mammal {
                     die();
                     return;
                 }
-                if (u instanceof Oveja) {
+                if (u instanceof Sheep) {
                     setEnergy(getEnergy() + 1);
                 }
             }

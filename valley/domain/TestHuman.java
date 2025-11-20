@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import java.awt.Color;
 
-public class TestHumano {
+public class TestHuman {
 
     private Valley valley;
 
@@ -19,7 +19,7 @@ public class TestHumano {
      */
     @Test
     public void testColorInicial() {
-        Humano h = new Humano(valley, 2, 2);
+        Human h = new Human(valley, 2, 2);
         assertEquals("El color inicial del humano debe ser rosado", Color.PINK, h.getColor());
     }
 
@@ -28,7 +28,7 @@ public class TestHumano {
      */
     @Test
     public void testEnergiaInicial() {
-        Humano h = new Humano(valley, 1, 1);
+        Human h = new Human(valley, 1, 1);
         assertEquals("La energía inicial debe ser 250", 250, h.getEnergy());
     }
 
@@ -37,7 +37,7 @@ public class TestHumano {
      */
     @Test
     public void testMuertePorEnergia() {
-        Humano h = new Humano(valley, 1, 1);
+        Human h = new Human(valley, 1, 1);
         h.setEnergy(0);
         h.act();
         assertNull("El humano debe morir y desaparecer del valle", valley.getUnit(1, 1));
