@@ -1,28 +1,24 @@
 package domain;
 
-import java.io.File;
-import java.util.*;
-
 /**
- * Valle que contiene una matriz de unidades y gestiona la simulación.
+ * Valley that contains a matrix of units and manages the simulation.
  *
- * Guarda, crea y actualiza las unidades (ovejas, lobos, heno, etc.) durante
- * cada tic.
- * 
- * Se añade Persistencia basica para guardar y cargar el estado del valle en un
- * archivo de texto.
+ * Stores, creates and updates units (sheep, wolves, hay, etc.) during each
+ * tick.
  *
- * @author1 MorenoRubiano
- * @author IbañezRubiano
- * @version 2
+ * Basic persistence methods (open/save/import/export) have been added as
+ * placeholders for reading and writing valley state to files.
+ *
+ * Authors: MorenoRubiano, IbañezRubiano
+ * Version: 2
  */
 public class Valley {
     static private int SIZE = 25;
     private Unit[][] places;
 
     /**
-     * Crea un nuevo valle con un tamaño fijo.
-     * Inicializa todas las posiciones vacías y agrega algunas unidades por defecto.
+     * Creates a new valley with a fixed size.
+     * Initializes all positions as empty and adds some default units.
      */
     public Valley() {
         places = new Unit[SIZE][SIZE];
@@ -35,39 +31,39 @@ public class Valley {
     }
 
     /**
-     * Retorna el tamaño del valle.
-     * 
-     * @return tamaño del valle
+     * Returns the size of the valley.
+     *
+     * @return valley size
      */
     public int getSize() {
         return SIZE;
     }
 
     /**
-     * Retorna la unidad ubicada en una posición específica.
-     * 
-     * @param r fila
-     * @param c columna
-     * @return unidad en la posición indicada o null si está vacía
+     * Returns the unit located at a specific position.
+     *
+     * @param r row
+     * @param c column
+     * @return the unit at the given position or null if empty
      */
     public Unit getUnit(int r, int c) {
         return places[r][c];
     }
 
     /**
-     * Asigna una unidad a una posición específica del valle.
-     * 
-     * @param r fila
-     * @param c columna
-     * @param e unidad a colocar
+     * Sets a unit at a specific position in the valley.
+     *
+     * @param r row
+     * @param c column
+     * @param e unit to place
      */
     public void setUnit(int r, int c, Unit e) {
         places[r][c] = e;
     }
 
     /**
-     * Crea y ubica algunas unidades iniciales (lobos, ovejas, heno y hoyos)
-     * en posiciones predefinidas del valle.
+     * Creates and places some initial units (wolves, sheep, hay and holes)
+     * in predefined positions in the valley.
      */
     public void someUnits() {
         Wolf akela = new Wolf(this, 10, 10);
@@ -95,12 +91,12 @@ public class Valley {
     }
 
     /**
-     * Calcula cuántas unidades vecinas son del mismo tipo que la ubicada en la
-     * posición dada.
-     * 
-     * @param r fila
-     * @param c columna
-     * @return número de vecinos iguales
+     * Calculates how many neighboring units are of the same type as the one
+     * located at the given position.
+     *
+     * @param r row
+     * @param c column
+     * @return number of equal neighbors
      */
     public int neighborsEquals(int r, int c) {
         int num = 0;
@@ -118,30 +114,30 @@ public class Valley {
     }
 
     /**
-     * Verifica si una posición está vacía dentro del valle.
-     * 
-     * @param r fila
-     * @param c columna
-     * @return true si está vacía, false en caso contrario
+     * Checks whether a position is empty inside the valley.
+     *
+     * @param r row
+     * @param c column
+     * @return true if empty, false otherwise
      */
     public boolean isEmpty(int r, int c) {
         return (inValley(r, c) && places[r][c] == null);
     }
 
     /**
-     * Verifica si una posición está dentro de los límites del valle.
-     * 
-     * @param r fila
-     * @param c columna
-     * @return true si la posición es válida
+     * Checks whether a position is inside the valley bounds.
+     *
+     * @param r row
+     * @param c column
+     * @return true if the position is valid
      */
     private boolean inValley(int r, int c) {
         return ((0 <= r) && (r < SIZE) && (0 <= c) && (c < SIZE));
     }
 
     /**
-     * Ejecuta un ciclo de simulación (tic-tac) para todas las unidades del valle.
-     * Cada unidad realiza su acción correspondiente llamando a su método act().
+     * Runs one simulation cycle (tick) for all units in the valley.
+     * Each unit performs its action by calling its act() method.
      */
     public void ticTac() {
         for (int r = 0; r < SIZE; r++) {
@@ -155,42 +151,42 @@ public class Valley {
     }
 
     /**
-     * Abre un valle desde un archivo.
-     * 
-     * @param file archivo desde donde se abrirá el valle
-     * @throws ValleyException si la operación no está implementada
+     * Opens a valley from a file.
+     *
+     * @param file file to read the valley from
+     * @throws ValleyException if the operation is not implemented
      */
     public void open(File file) throws ValleyException {
-        throw new ValleyException("Opción open en construcción. Archivo " + file.getName());
+        throw new ValleyException("Open option under construction. File: " + file.getName());
     }
 
     /**
-     * Guarda el valle actual en un archivo.
-     * 
-     * @param file archivo donde se guardará el valle
-     * @throws ValleyException si la operación no está implementada
+     * Saves the current valley to a file.
+     *
+     * @param file file where the valley will be saved
+     * @throws ValleyException if the operation is not implemented
      */
     public void save(File file) throws ValleyException {
-        throw new ValleyException("Opción save en construcción. Archivo " + file.getName());
+        throw new ValleyException("Save option under construction. File: " + file.getName());
     }
 
     /**
-     * Importa un valle desde un archivo.
-     * 
-     * @param file archivo desde donde se importará el valle
-     * @throws ValleyException si la operación no está implementada
+     * Imports a valley from a file.
+     *
+     * @param file file to import the valley from
+     * @throws ValleyException if the operation is not implemented
      */
     public void importValley(File file) throws ValleyException {
-        throw new ValleyException("Opción import en construcción. Archivo " + file.getName());
+        throw new ValleyException("Import option under construction. File: " + file.getName());
     }
 
     /**
-     * Exporta el valle actual a un archivo.
-     * 
-     * @param file archivo donde se exportará el valle
-     * @throws ValleyException si la operación no está implementada
+     * Exports the current valley to a file.
+     *
+     * @param file file where the valley will be exported
+     * @throws ValleyException if the operation is not implemented
      */
     public void export(File file) throws ValleyException {
-        throw new ValleyException("Opción export en construcción. Archivo " + file.getName());
+        throw new ValleyException("Export option under construction. File: " + file.getName());
     }
 }

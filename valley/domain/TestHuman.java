@@ -15,32 +15,32 @@ public class TestHuman {
     }
 
     /**
-     * Verifica que el color inicial del humano sea rosado.
+     * Verifies that the human's initial color is pink.
      */
     @Test
-    public void testColorInicial() {
+    public void testInitialColor() {
         Human h = new Human(valley, 2, 2);
-        assertEquals("El color inicial del humano debe ser rosado", Color.PINK, h.getColor());
+        assertEquals("The human's initial color should be pink", Color.PINK, h.getColor());
     }
 
     /**
-     * Verifica que el humano comience con energía inicial de 250.
+     * Verifies that the human starts with initial energy of 250.
      */
     @Test
-    public void testEnergiaInicial() {
+    public void testInitialEnergy() {
         Human h = new Human(valley, 1, 1);
-        assertEquals("La energía inicial debe ser 250", 250, h.getEnergy());
+        assertEquals("Initial energy should be 250", 250, h.getEnergy());
     }
 
     /**
-     * Verifica que el humano muere al quedarse sin energía.
+     * Verifies that the human dies when energy reaches zero.
      */
     @Test
-    public void testMuertePorEnergia() {
+    public void testDeathByEnergy() {
         Human h = new Human(valley, 1, 1);
         h.setEnergy(0);
         h.act();
-        assertNull("El humano debe morir y desaparecer del valle", valley.getUnit(1, 1));
+        assertNull("The human should die and be removed from the valley", valley.getUnit(1, 1));
     }
 
 }

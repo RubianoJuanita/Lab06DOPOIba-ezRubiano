@@ -2,7 +2,11 @@ package domain;
 
 import java.awt.Color;
 
-/*No olviden adicionar la documentacion*/
+/*
+ * Unit interface representing any element that can exist in the valley
+ * (animals, resources, obstacles, ...). Implementing classes should provide
+ * behavior for `act()` and may override default visual and type properties.
+ */
 public interface Unit {
     public static final int SQUARE = 2;
     public static final int ROUND = 1;

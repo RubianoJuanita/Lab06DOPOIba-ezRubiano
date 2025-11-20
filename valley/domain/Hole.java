@@ -3,13 +3,13 @@ package domain;
 import java.awt.Color;
 
 /**
- * Clase Hole - Obstaculo Estático
- * Color : verde (color.green)
- * forma : redonda(Round)
- * Tiene posicion fija no se mueve
- * Es un recurso/obstaculo, no es un animal
- * Representa un hueco en el valle
- * @ Cristian Moreno - Juanita Rubiano
+ * Hole class - Static obstacle
+ * Color: green
+ * Shape: round (ROUND)
+ * Has a fixed position and does not move
+ * It's a resource/obstacle, not an animal
+ * Represents a hole in the valley
+ * Authors: Cristian Moreno - Juanita Rubiano
  */
 
 public class Hole implements Unit {
@@ -18,10 +18,10 @@ public class Hole implements Unit {
     private int column;
 
     /**
-     * Constructor del hole
-     * 
-     * @param row    Fila donde se ubica
-     * @param column Columna donde se ubica
+     * Hole constructor
+     *
+     * @param row    row where it is located
+     * @param column column where it is located
      */
     public Hole(int row, int column) {
         this.row = row;
@@ -30,16 +30,16 @@ public class Hole implements Unit {
     }
 
     /**
-     * El hole no hace nada en cada tic-tac
-     * Simplemente existe como obstáculo
+     * The hole does nothing on each tick.
+     * It simply exists as an obstacle.
      */
     @Override
     public void act() {
     }
 
     /**
-     * Retorna la forma de la del hole ( Redonda )
-     * 
+     * Returns the hole's shape (round).
+     *
      * @return Unit.ROUND
      */
     @Override
@@ -48,9 +48,9 @@ public class Hole implements Unit {
     }
 
     /**
-     * Retorna el color del hole verde
-     * 
-     * @return Color.gray
+     * Returns the hole's color (green).
+     *
+     * @return Color.green
      */
     @Override
     public Color getColor() {
@@ -58,8 +58,8 @@ public class Hole implements Unit {
     }
 
     /**
-     * Indica que el hueco es un recurso/obstáculo
-     * 
+     * Indicates that the hole is a resource/obstacle.
+     *
      * @return true
      */
     @Override
@@ -68,8 +68,8 @@ public class Hole implements Unit {
     }
 
     /**
-     * Indica que el hole no es un animal sino catalogado como recurso
-     * 
+     * Indicates that the hole is not an animal but a resource.
+     *
      * @return false
      */
     @Override
@@ -78,18 +78,18 @@ public class Hole implements Unit {
     }
 
     /**
-     * Retorna la fila donde está el hueco
-     * 
-     * @return fila
+     * Returns the row where the hole is located.
+     *
+     * @return row
      */
     public int getRow() {
         return row;
     }
 
     /**
-     * Retorna la columna donde está el hueco
-     * 
-     * @return columna
+     * Returns the column where the hole is located.
+     *
+     * @return column
      */
     public int getColumn() {
         return column;
