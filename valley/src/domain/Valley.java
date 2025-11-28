@@ -1,13 +1,7 @@
 package domain;
 
 import java.util.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.Serializable;
-import java.io.ObjectOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 
 /**
  * Valle que contiene una matriz de unidades y gestiona la simulación.
@@ -17,7 +11,7 @@ import java.io.ObjectInputStream;
  *
  * @author MorenoRubiano
  * @author2 IbañezRubiano
- * @version 1.0
+ * @version 1.1
  */
 public class Valley implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -41,8 +35,7 @@ public class Valley implements Serializable {
 
     /**
      * Retorna el tamaño del valle.
-     * 
-     * @return tamaño del valle
+     * * @return tamaño del valle
      */
     public int getSize() {
         return SIZE;
@@ -50,24 +43,27 @@ public class Valley implements Serializable {
 
     /**
      * Retorna la unidad ubicada en una posición específica.
-     * 
-     * @param r fila
+     * * @param r fila
      * @param c columna
      * @return unidad en la posición indicada o null si está vacía
      */
     public Unit getUnit(int r, int c) {
-        return places[r][c];
+        if (inValley(r, c)) {
+            return places[r][c];
+        }
+        return null;
     }
 
     /**
      * Asigna una unidad a una posición específica del valle.
-     * 
-     * @param r fila
+     * * @param r fila
      * @param c columna
      * @param e unidad a colocar
      */
     public void setUnit(int r, int c, Unit e) {
-        places[r][c] = e;
+        if (inValley(r, c)) {
+            places[r][c] = e;
+        }
     }
 
     /**
@@ -91,19 +87,12 @@ public class Valley implements Serializable {
 
         Humano moreno = new Humano(this, 15, 5);
         Humano rubiano = new Humano(this, 18, 20);
-
-        // Hole Moreno = new Hole(this, 9, 9);
-        // Hole Rubiano = new Hole(this, 18, 18);
-
-        // places[9][9] = Moreno;
-        // places[18][18] = Rubiano;
     }
 
     /**
      * Calcula cuántas unidades vecinas son del mismo tipo que la ubicada en la
      * posición dada.
-     * 
-     * @param r fila
+     * * @param r fila
      * @param c columna
      * @return número de vecinos iguales
      */
@@ -124,8 +113,7 @@ public class Valley implements Serializable {
 
     /**
      * Verifica si una posición está vacía dentro del valle.
-     * 
-     * @param r fila
+     * * @param r fila
      * @param c columna
      * @return true si está vacía, false en caso contrario
      */
@@ -135,8 +123,7 @@ public class Valley implements Serializable {
 
     /**
      * Verifica si una posición está dentro de los límites del valle.
-     * 
-     * @param r fila
+     * * @param r fila
      * @param c columna
      * @return true si la posición es válida
      */
@@ -159,13 +146,11 @@ public class Valley implements Serializable {
         }
     }
 
-    // IbañezRubianoLab06 Agregacion de métodos para manejo de archivos (a
-
     /**
-     * Abre un archivo del valle (por implementar).
-     * 
-     * @param file Archivo a abrir
-     * @throws ValleyException con mensaje indicando que está en construcción
+     * Abre un archivo binario (.dat) del valle y actualiza el estado.
+     * Solo actualiza la matriz de unidades, respetando el tamaño estático.
+     * * @param file Archivo a abrir
+     * @throws ValleyException si ocurre un error de lectura
      */
     public void open(File file) throws ValleyException {
         try {
@@ -173,52 +158,36 @@ public class Valley implements Serializable {
             Valley loadedValley = (Valley) ois.readObject();
             ois.close();
 
-            // Actualizamos el estado de ESTA instancia con los datos cargados
-            // para no romper la referencia que tiene la GUI.
-            this.SIZE = loadedValley.SIZE;
             this.places = loadedValley.places;
             
         } catch (Exception e) {
-            // Se cumple la restricción: solo usar OPEN_ERROR
             throw new ValleyException(ValleyException.OPEN_ERROR);
         }
     }
 
     /**
      * Copia del método open (versión 00).
-     * Abre un archivo del valle (por implementar).
-     * 
-     * @param file Archivo a abrir
-     * @throws ValleyException con mensaje indicando que está en construcción
+     * * @param file Archivo a abrir
+     * @throws ValleyException indicando construcción
      */
     public void open00(File file) throws ValleyException {
         throw new ValleyException(ValleyException.OPEN_ERROR + ". Archivo " + file.getName());
     }
 
     /**
-     * Guarda el estado actual del valle en un archivo.
-     * Serializa el objeto Valley completo con todas sus unidades.
-     * 
-     * @param file Archivo donde guardar el valle
+     * Guarda el estado actual del valle en un archivo binario (.dat).
+     * * @param file Archivo donde guardar
      * @throws ValleyException si ocurre un error durante el guardado
      */
     public void save(File file) throws ValleyException {
         try {
-            // Asegurar que el archivo tenga extensión .dat
             String filePath = file.getAbsolutePath();
             if (!filePath.endsWith(".dat")) {
                 file = new File(filePath + ".dat");
             }
-
-            // Crear el flujo de salida para objetos
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
-
-            // Escribir el objeto Valley completo
             oos.writeObject(this);
-
-            // Cerrar el flujo
             oos.close();
-
         } catch (IOException e) {
             throw new ValleyException("Error al guardar el archivo: " + e.getMessage());
         }
@@ -226,32 +195,94 @@ public class Valley implements Serializable {
 
     /**
      * Copia del método save (versión 00).
-     * Guarda el valle en un archivo (por implementar).
-     * 
-     * @param file Archivo donde guardar
-     * @throws ValleyException con mensaje indicando que está en construcción
+     * * @param file Archivo donde guardar
+     * @throws ValleyException indicando construcción
      */
     public void save00(File file) throws ValleyException {
         throw new ValleyException(ValleyException.SAVE_ERROR + ". Archivo " + file.getName());
     }
 
     /**
-     * Importa datos desde un archivo (por implementar).
-     * 
-     * @param file Archivo a importar
-     * @throws ValleyException con mensaje indicando que está en construcción
+     * Importa datos desde un archivo (versión 00).
+     * * @param file Archivo a importar
+     * @throws ValleyException indicando construcción
      */
-    public void importFile(File file) throws ValleyException {
+    public void importFile00(File file) throws ValleyException {
         throw new ValleyException(ValleyException.IMPORT_ERROR + ". Archivo " + file.getName());
+    }
+    
+    /**
+     * Importa el estado del valle desde un archivo de texto plano.
+     * El formato esperado no incluye cabecera de tamaño.
+     * Reinicia el valle al tamaño estático por defecto.
+     * * @param f El archivo de texto a leer.
+     * @throws ValleyException Si ocurre un error de lectura o formato.
+     */
+    public void importFile(File f) throws ValleyException {
+        final String IMPORT_ERROR = "Error importar"; 
+        
+        if (!f.exists() || f.isDirectory()) {
+            throw new ValleyException(IMPORT_ERROR);
+        }
+        try (Scanner s = new Scanner(f)) {
+            places = new Unit[SIZE][SIZE];            
+            while (s.hasNext()) {
+                String t = s.next();
+                int r = s.nextInt(), c = s.nextInt();
+                Unit u = null;                 
+                if (r >= 0 && r < SIZE && c >= 0 && c < SIZE) {
+                    if (t.equals("Humano")) u = new Humano(this, r, c);
+                    else if (t.equals("Oveja")) u = new Oveja(this, r, c);
+                    else if (t.equals("Hay")) u = new Hay(this, r, c); 
+                    else if (t.equals("Hole")) u = new Hole(r, c);                    
+                    if (u != null) setUnit(r, c, u);
+                }                
+                if (u instanceof Animal || (u == null && isAnimalType(t))) {
+                    if (s.hasNextInt()) {
+                        int energy = s.nextInt();
+                        if (u instanceof Animal) ((Animal)u).setEnergy(energy);
+                    }
+                    if (s.hasNextInt()) s.nextInt(); 
+                }
+            }
+        } catch (Exception e) { throw new ValleyException(IMPORT_ERROR); }
+    }
+    
+    /**
+     * Método auxiliar para determinar si un tipo de texto corresponde a un animal.
+     * Usado para consumir tokens correctamente si la unidad falló al crearse.
+     */
+    private boolean isAnimalType(String type) {
+        return type.equals("Humano") || type.equals("Oveja") || type.equals("Wolf");
     }
 
     /**
-     * Exporta datos a un archivo (por implementar).
-     * 
-     * @param file Archivo donde exportar
-     * @throws ValleyException con mensaje indicando que está en construcción
+     * Exporta el estado actual del valle a un archivo de texto plano.
+     * No incluye cabecera de tamaño.
+     * * @param f Archivo donde exportar
+     * @throws ValleyException si ocurre un error de escritura.
      */
-    public void export(File file) throws ValleyException {
-        throw new ValleyException(ValleyException.EXPORT_ERROR + ". Archivo " + file.getName());
+    public void export(File f) throws ValleyException {
+        final String EXPORT_ERROR = "Error exportar"; 
+
+        if (!f.getName().toLowerCase().endsWith(".txt")) {
+            f = new File(f.getAbsolutePath() + ".txt");
+        }
+
+        try (PrintWriter p = new PrintWriter(new FileWriter(f))) {
+            for (int i = 0; i < SIZE; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    Unit u = places[i][j];
+                    if (u != null) {
+                        String d = u.getClass().getSimpleName() + " " + i + " " + j;
+                        if (u instanceof Animal) {
+                            Animal a = (Animal) u;
+                            d += " " + a.getEnergy() + " " + a.getDays(); 
+                        }
+                        p.println(d);
+                    }
+                }
+            }
+        } catch (IOException e) { throw new ValleyException(EXPORT_ERROR); }
     }
 }
